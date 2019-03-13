@@ -2,31 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using company_api.DTO;
+using company_api.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace company_api.Controllers
 {
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class ValuesController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ApplicationContext _context;
+
+        public ValuesController(ApplicationContext application)
         {
-            return new string[] { "value1", "value2" };
+            _context = application;
+        }
+        [HttpGet]
+        public IEnumerable<Company> Get()
+        {
+
+            return _context.Company.ToList();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(Guid id)
         {
+          
             return "value";
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]CompanyEmployeeDTO value)
         {
+            return Ok();
         }
 
         // PUT api/values/5
