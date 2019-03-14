@@ -9,12 +9,12 @@ namespace company_api.DTO
     public class CompanyEmployeeDTO
     {
       
-        //public Guid CompanyID { get; set; }
+        
 
         public String CompanyName { get; set; }
 
         public DateTime EstablishmentYear { get; set; }
 
-        //public List<Employee> Employees { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 }
