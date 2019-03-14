@@ -27,7 +27,8 @@ namespace company_api.Controllers
             return _companyRepository.GetCompanies();
         }
 
-        
+
+        [Route("create")]
         [HttpPost]
         public IActionResult Post([FromBody]CompanyEmployeeDTO value)
         {
@@ -40,8 +41,15 @@ namespace company_api.Controllers
 
             return Ok(new { id = companyid });
            
-;        }
+        }
 
+        [Route("search")]
+        [HttpPost]
+        public IActionResult Search([FromBody]SearchDTO search)
+        {
+            
+            return Ok(_companyRepository.Search(search));
+        }
         
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]string value)

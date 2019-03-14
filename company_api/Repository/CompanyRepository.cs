@@ -10,6 +10,7 @@ namespace company_api.Repository
     public interface ICompanyRepository
     {
         Guid AddCompany(CompanyEmployeeDTO item);
+        List<Company> Search(SearchDTO search);
         IEnumerable<Company> GetCompanies();
 
     }
@@ -47,6 +48,12 @@ namespace company_api.Repository
         public IEnumerable<Company> GetCompanies()
         {
             return _context.Company.ToList();
+        }
+
+        public List<Company> Search(SearchDTO search)
+        {
+           List<Company> company = _context.Company.Where(s => search.Keyword.All(k => s.CompanyName.Contains(k))).ToList();
+           return company;
         }
     }
 }
