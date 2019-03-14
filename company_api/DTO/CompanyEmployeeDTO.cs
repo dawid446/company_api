@@ -10,7 +10,6 @@ namespace company_api.DTO
     {
       
         
-
         public String CompanyName { get; set; }
 
         public DateTime EstablishmentYear { get; set; }
