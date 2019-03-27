@@ -6,6 +6,7 @@ using company_api.DTO;
 using company_api.Model;
 using company_api.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace company_api.Controllers
 {
@@ -47,12 +48,20 @@ namespace company_api.Controllers
         [HttpPost]
         public IActionResult Search([FromBody]SearchDTO search)
         {
-            
-            return Ok(_companyRepository.Search(search));
+
+            var listsearch = _companyRepository.Search(search);
+
+            //string authorData = JsonConvert.SerializeObject(listsearch, new JsonSerializerSettings()
+            //{
+            //    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            //    Formatting = Formatting.Indented
+            //});
+
+            return Ok(listsearch);
         }
-        
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]string value)
+
+        [HttpPut, Route("update/{id}")]
+        public IActionResult Put(int id, [FromBody]CompanyEmployeeDTO value)
         {
             return Ok();
         }

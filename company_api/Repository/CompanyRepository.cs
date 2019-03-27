@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using company_api.Model;
 using company_api.DTO;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace company_api.Repository
 {
@@ -52,7 +54,11 @@ namespace company_api.Repository
 
         public List<Company> Search(SearchDTO search)
         {
-           List<Company> company = _context.Company.Where(s => search.Keyword.All(k => s.CompanyName.Contains(k))).ToList();
+            List<Company> company = _context.Company
+                .Where(s => search.Keyword
+                .All(k => s.CompanyName.Contains(k)))
+                .Include(x=> x.Employee).ToList();
+            
            return company;
         }
     }
